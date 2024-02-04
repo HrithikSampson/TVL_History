@@ -3,10 +3,10 @@ import type { Metadata, ResolvingMetadata } from "next";
 import { headers } from "next/headers";
 
 export async function generateMetadata(
-  params: any,
+  { searchParams: { chainId } }: { searchParams: { chainId: string } },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  console.log(params);
+  console.log(chainId);
   const host = headers().get("host");
   const protocal = process?.env.NODE_ENV === "development" ? "http" : "https";
 
@@ -25,6 +25,7 @@ export async function generateMetadata(
       "fc:frame": "vNext",
       "fc:frame:image": `${protocal}://${host}/api/get_tvl_data_image`,
       "fc:frame:button:1": "Back",
+      "fc:frame:post_url": `${protocal}://${host}`,
     },
   };
 }

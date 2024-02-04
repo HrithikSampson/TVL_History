@@ -23,7 +23,7 @@ export async function generateMetadata(
       'fc:frame:image': `${protocal}://${host}/api/get_tvl_data_image`,
       'fc:frame:input:text': 'Enter the chain ID',
       'fc:frame:button:1': 'View chart',
-      'fc:frame:button:1:action': 'post_redirect',
+      // 'fc:frame:button:1:action': 'post_redirect',
       'fc:frame:post_url': `${protocal}://${host}/api/process_signature`,
     }
   }

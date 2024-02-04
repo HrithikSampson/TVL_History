@@ -15,7 +15,6 @@ const getTVLData = async () => {
       name: key,
       amount: value,
     }));
-  
     return tvlData;
 };
 export async function GET(req: NextRequest) {

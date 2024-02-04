@@ -7,9 +7,6 @@ export const dynamic = 'force-dynamic';
 export function GET(req: NextRequest) {
     try{
         const text = req.nextUrl.searchParams.get('text');
-        
-        
-        
         return new NextResponse(
             `
                 <!DOCTYPE html>

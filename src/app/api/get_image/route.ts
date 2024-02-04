@@ -18,7 +18,7 @@ export function GET(req: NextRequest) {
                     <title>TVL of Chain</title>
                     <meta property="og:title" content="Total Value">
                     <meta name="fc:frame" content="vNext"/>
-                    <meta name="image" property="og:image" content="https://placehold.co/400x209?text=${text}"/>
+                    <meta name="image" property="fc:frame:image" content="https://placehold.co/400x209?text=${text}"/>
                   </head>
                 </html>
             `,

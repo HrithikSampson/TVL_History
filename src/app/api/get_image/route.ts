@@ -1,9 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
+import { NextApiRequest } from "next";
 import { useSearchParams } from 'next/navigation'
 
-export function GET(req: NextRequest) {
+export function GET(req: NextApiRequest) {
     try{
-        const text = useSearchParams()!.get('text');
+        const text = req.query['text'];
         
         return new NextResponse(
             `

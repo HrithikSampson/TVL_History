@@ -20,11 +20,6 @@ export function GET(req: NextRequest) {
                     <meta name="fc:frame" content="vNext"/>
                     <meta name="image" property="og:image" content="https://placehold.co/400x209?text=${text}"/>
                   </head>
-       
-                    <body>
-                        <h1>Hello, World!</h1>
-                        <p>Welcome to our website.</p>
-                    </body>
                 </html>
             `,
             { status: 200, headers: { 'content-type': 'text/html' } }

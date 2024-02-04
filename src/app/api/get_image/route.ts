@@ -1,9 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
-
+import { useSearchParams } from 'next/navigation'
 
 export function GET(req: NextRequest) {
     try{
-        const text = req.nextUrl.searchParams.get('text');
+        const text = useSearchParams()!.get('text');
         
         return new NextResponse(
             `

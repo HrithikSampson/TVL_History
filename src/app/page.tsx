@@ -21,9 +21,8 @@ export async function generateMetadata(
     other: {
       'fc:frame': 'vNext',
       'fc:frame:image': `${protocal}://${host}/api/get_tvl_data_image`,
-      'fc:frame:input:text': 'Enter the chain ID',
+      'fc:frame:input:text': 'Enter the chain name',
       'fc:frame:button:1': 'View chart',
-      // 'fc:frame:button:1:action': 'post_redirect',
       'fc:frame:post_url': `${protocal}://${host}/api/process_signature`,
     }
   }

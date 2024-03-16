@@ -6,16 +6,16 @@ export async function generateMetadata(
   { searchParams: { chainId } }: { searchParams: { chainId: string } },
   parent: ResolvingMetadata
 ): Promise<Metadata> {
-  console.log(chainId);
+  // console.log(chainId);
   const host = headers().get("host");
   const protocal = process?.env.NODE_ENV === "development" ? "http" : "https";
-
+  
   return {
     title: "Total Value Locked Chart",
     openGraph: {
       images: [
         {
-          url: `${protocal}://${host}/api/get_tvl_data_image`,
+          url: `${protocal}://${host}/api/chain?chainId=${chainId}`,
           width: 1200,
           height: 630,
         },
@@ -23,7 +23,7 @@ export async function generateMetadata(
     },
     other: {
       "fc:frame": "vNext",
-      "fc:frame:image": `${protocal}://${host}/api/get_tvl_data_image`,
+      "fc:frame:image": `${protocal}://${host}/api/chain?chainId=${chainId}`,
       "fc:frame:button:1": "Back",
       "fc:frame:post_url": `${protocal}://${host}`,
     },

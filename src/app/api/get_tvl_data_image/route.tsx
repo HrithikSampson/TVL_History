@@ -1,7 +1,7 @@
 import { CHAINS } from "@/utils/chains";
 import { ImageResponse } from "@vercel/og";
 import { NextRequest } from "next/server";
-
+import { headers } from "next/headers";
 export const runtime = "edge";
 export const dynamic = "force-dynamic";
 
@@ -49,7 +49,6 @@ export async function GET(req: NextRequest) {
           Total Value Locked
         </h2>
         {tvlData.map((opt, index) => {
-          // For every even index, create a new row
           if (index % 2 === 0) {
             return (
               <div
@@ -57,14 +56,12 @@ export async function GET(req: NextRequest) {
                 style={{
                   marginTop: index === 0 ? "24px" : "8px",
                   display: "flex",
-                  justifyContent: "space-between", // Spreads out the items evenly
+                  justifyContent: "space-between",
                   width: "80%",
-                  gap: "16px", // Keeps space between items
+                  gap: "16px", 
                 }}
               >
-                {/* First item */}
                 <ItemComponent opt={tvlData[index]} />
-                {/* Second item, if exists */}
                 {tvlData[index + 1] && (
                   <ItemComponent opt={tvlData[index + 1]} />
                 )}
@@ -80,6 +77,10 @@ export async function GET(req: NextRequest) {
 }
 
 function ItemComponent({ opt }: { opt: ChainTVLData }) {
+  
+  const host = headers().get("host");
+  
+  const protocal = process?.env.NODE_ENV === "development" ? "http" : "https";
   return (
     <div
       style={{
@@ -95,20 +96,39 @@ function ItemComponent({ opt }: { opt: ChainTVLData }) {
         gap: "16px",
       }}
     >
-      <img
-        src={CHAINS[opt.name as keyof typeof CHAINS].icon}
-        alt={opt.name}
-        height={60}
-        width={60}
-      />
-      <div style={{ display: "flex", flexDirection: "column", marginLeft: '16px' }}>
-        <h3>{opt.name}</h3>
-        <div style={{ display: "flex", margin: 0, padding: 0, height: 30, gap: '16px' }}>
-          TVL: ~ USD {Math.round(opt.amount)}
-          {' '}
-          (ID: {CHAINS[opt.name as keyof typeof CHAINS].id})
-        </div>
-      </div>
+      {(opt.name in CHAINS)?
+        <>
+          <img
+            src={CHAINS[opt.name as keyof typeof CHAINS].icon}
+            alt={opt.name}
+            height={60}
+            width={60}
+          />
+          <div style={{ display: "flex", flexDirection: "column", marginLeft: '16px' }}>
+            <h3>{opt.name}</h3>
+            <div style={{ display: "flex", margin: 0, padding: 0, height: 30, gap: '16px' }}>
+              TVL: ~ USD {Math.round(opt.amount)}
+              {' '}
+              (ID: {CHAINS[opt.name as keyof typeof CHAINS].id})
+            </div>
+          </div>
+        </>:<>
+          
+        <img
+            src={`${protocal}://${host}/api/chain_image?name=${opt.name}`}
+            alt={opt.name}
+            height={60}
+            width={60}
+          />
+          <div style={{ display: "flex", flexDirection: "column", marginLeft: '16px' }}>
+            <h3>{opt.name}</h3>
+            <div style={{ display: "flex", margin: 0, padding: 0, height: 30, gap: '16px' }}>
+              TVL: ~ USD {Math.round(opt.amount)}
+              {' '}
+              (ID: )
+            </div>
+          </div>
+        </>}
     </div>
   );
 }

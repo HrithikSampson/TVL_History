@@ -1,11 +1,15 @@
 {
     "builds": [
+        
       {
         "src": "package.json",
         "use": "@vercel/node",
         "config": {
           "systemPackages": ["zlib1g"]
         }
+      },
+      {
+        "build": "npm run build"
       }
     ]
   }

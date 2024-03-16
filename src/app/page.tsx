@@ -1,26 +1,34 @@
+import React from "react";
+import type { Metadata, ResolvingMetadata } from 'next'
+import { headers } from "next/headers";
 
-import React, { useState } from 'react';
-import { ChainTVLData } from './api/get_tvl_data/route';
-
-export default async function Home () {
-  const data: ChainTVLData[] = await fetch(`${process.env.API_URL}/api/get_tvl_data`).then((res)=>res.json());
-  const tvlHTML = data.map(async (obj)=>{
-    try{
-      const image = await fetch(`${process.env.API_URL}/api/get_image?text=${obj.name}:+${obj.amount}`);
-      const TVLhtml = await image.text();
-      return {TVLhtml:TVLhtml,obj:obj}
+export async function generateMetadata(
+  {},
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const host = headers().get("host");
+  const protocal = process?.env.NODE_ENV === "development" ? "http" : "https";
+ 
+  return {
+    title: 'Total Value Locked Homepage',
+    openGraph: {
+      images: [{
+        url: `${protocal}://${host}/api/get_tvl_data_image`,
+        width: 1200,
+        height: 630
+      }],
+    },
+    other: {
+      'fc:frame': 'vNext',
+      'fc:frame:image': `${protocal}://${host}/api/get_tvl_data_image`,
+      'fc:frame:input:text': 'Enter the chain name',
+      'fc:frame:button:1': 'View chart',
+      'fc:frame:post_url': `${protocal}://${host}/api/process_signature`,
     }
-    catch(err){
-      return {TVLhtml:`<p>Error Loading the Image</p>`,obj:obj}
-    }
-  })
-  return (
-    <div>
-      {tvlHTML.map(async (element)=>{
-        const {TVLhtml:html,obj:obj} = await element;
-        return(<div key={obj.name} dangerouslySetInnerHTML={{ __html: html }} />)
-      })}
-    </div>
-  );
-};
+  }
+}
 
+export default function Home() {
+  
+  return <main />
+}

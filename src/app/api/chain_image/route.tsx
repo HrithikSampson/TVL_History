@@ -7,8 +7,6 @@ export const dynamic = "force-dynamic";
 
 export async function GET(req: NextRequest) {
     const name = req.nextUrl.searchParams.get('name')!;
-    // console.log(req.nextUrl.searchParams);
-    // console.log(name);
     return new ImageResponse(
       (
         

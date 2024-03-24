@@ -19,11 +19,15 @@ export async function generateMetadata(
       }],
     },
     other: {
-      'fc:frame': 'vNext',
-      'fc:frame:image': `${protocal}://${host}/api/get_tvl_data_image`,
-      'fc:frame:input:text': 'Enter the chain name',
-      'fc:frame:button:1': 'View chart',
-      'fc:frame:post_url': `${protocal}://${host}/api/process_signature`,
+      'of:version': 'vNext',
+      'of:accepts:farcaster':'vNext',
+      "of:image": `${protocal}://${host}/api/get_tvl_data_image`,
+      'of:input:text': 'Enter the chain name',
+      'of:button:1': 'View chart',
+      'of:accepts:xmtp': '2024-02-01',
+      'of:accepts:lens': '1.1',
+      'of:image:alt':'All Chains TVL data',
+      'of:post_url': `${protocal}://${host}/api/process_signature`,
     }
   }
 }

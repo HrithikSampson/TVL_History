@@ -20,7 +20,7 @@ export type ChainTVLData = {
 const getTVLData = async (s: string) => {
   // console.log(`https://api.llama.fi/v2/historicalChainTvl/${s}`)
   const response = await fetch(`https://api.llama.fi/v2/historicalChainTvl/${s}`);
-  const data = await response.json();
+  const data: ChainTVLData[] = await response.json();
   const tvlData: ChainTVLData[] = data;
   // console.log(data)
   return tvlData;
@@ -36,7 +36,7 @@ export async function GET(req: NextRequest) {
   // console.log('tvlData',tvlData)
   const data = await tvlData
   // console.log(data.slice(0,10));
-  const data1 = data.slice(0,10)
+  // const data1 = data.slice(0,10)
   const labels = tvlData.map(data => data.date);
   const dataPoints = tvlData.map(data => data.tvl);
   const canvas = createCanvas(1200, 630);

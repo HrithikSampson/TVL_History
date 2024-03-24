@@ -34,7 +34,7 @@ export async function GET(req: NextRequest) {
   // console.log(req.nextUrl.searchParams);
   const tvlData = await getTVLData(s);
   // console.log('tvlData',tvlData)
-  const data = await tvlData
+  // const data = await tvlData
   // console.log(data.slice(0,10));
   // const data1 = data.slice(0,10)
   const labels = tvlData.map(data => data.date);

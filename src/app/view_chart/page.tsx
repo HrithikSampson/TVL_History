@@ -22,10 +22,14 @@ export async function generateMetadata(
       ],
     },
     other: {
-      "fc:frame": "vNext",
-      "fc:frame:image": `${protocal}://${host}/api/chain?chainId=${chainId}`,
-      "fc:frame:button:1": "Back",
-      "fc:frame:post_url": `${protocal}://${host}`,
+      'of:version': 'vNext',
+      'of:accepts:farcaster':'vNext',
+      "of:image": `${protocal}://${host}/api/chain?chainId=${chainId}`,
+      "of:button:1": "Back",
+      'of:accepts:xmtp': '2024-02-01',
+      'of:accepts:lens': '1.1',
+      "of:post_url": `${protocal}://${host}`,
+      'of:image:alt':'Chart for ${chainId}',
     },
   };
 }

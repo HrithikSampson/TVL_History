@@ -5,7 +5,7 @@ export const runtime = "edge";
 export const dynamic = "force-dynamic";
 
 export async function POST(req: NextRequest) {
-  const data = await req.json();
+  const data:{untrustedData?:{inputText?: String}} = await req.json();
   const chain = data?.untrustedData?.inputText;
 
 
